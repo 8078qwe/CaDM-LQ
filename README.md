@@ -1,12 +1,40 @@
 # **Open-vocabulary Human-object Interaction Detection with Calibrated Diffusion Models**
 
+## Table of Contents
+
+- [Background](#background)
+- [Datasets](#datasets)
+- [Dependency](#dependency)
+- [Usage](#usage)
+- [Acknowledgments](#acknowledgments)
+
+## Background
+
+CaDM-LQ is a **two-stage teacher–student framework** for **open-vocabulary human–object interaction (Ov-HOI) detection**.
+Stage I builds a calibrated V&L teacher (CaDiff) with HOI priors; Stage II trains an HOI detector with **pair learning** and **locality-aware queries** under the teacher’s soft supervision.
 
 
-##  Key Features
-- ### **132**: 
-- ### **132**: 
 
-## Installation
+### Stage I: Calibrating Diffusion Models with HOI Priors (CaDiff Teacher)
+
+<p align="center">
+  <img src="assets/Stage1.png" width="600" alt="Stage I: CaDiff teacher calibration">
+</p>
+
+**CaDiff** calibrates diffusion-based region representations with HOI priors via a **visual branch** and a **text branch**, producing HOI-aligned embeddings that are less noisy and more interaction-aware.
+
+---
+
+### Stage II: Training CaDM-LQ with Locality-aware Queries (Student)
+
+<p align="center">
+  <img src="assets/stage2.png" width="600" alt="Stage II: CaDM-LQ student training">
+</p>
+
+The student detects humans/objects (e.g., DETR), then uses a **Human–Object Pair Learner** to filter/refine candidate pairs and a **Locality-aware Decoder** to inject spatial priors into interaction queries. The **CaDiff teacher provides soft labels** to guide open-vocabulary generalization.
+
+
+## Dependency
 Installl the dependencies.
 ```
 pip install -r requirements.txt
@@ -93,7 +121,7 @@ python ./tools/convert_parameters.py \
 Download the pretrained model of Deformable DETR detector for [Swin-L](https://drive.google.com/drive/folders/1qD5m1NmK0kjE5hh-G17XUX751WsEG-h_), and put it to the `params` directory.
 
 
-##  Training
+##  Usage
 After the preparation, you can start training with the following commands.
 ### Calibration
 ```
@@ -124,5 +152,5 @@ sh ./run/hico_l_eval.sh
 
 
 
-## Acknowledge
+## Acknowledgments
 This repo is mainly based on [GEN-VLKT](https://github.com/YueLiao/gen-vlkt) and [DINO](https://github.com/IDEA-Research/DINO) . We thank their well-organized code!
