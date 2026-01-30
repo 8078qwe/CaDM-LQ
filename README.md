@@ -3,8 +3,8 @@
 ## Table of Contents
 
 - [Background](#background)
-- [Datasets](#datasets)
 - [Dependency](#dependency)
+- [Datasets](#datasets)
 - [Usage](#usage)
 - [Acknowledgments](#acknowledgments)
 
